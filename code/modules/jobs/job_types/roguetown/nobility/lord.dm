@@ -51,6 +51,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 /datum/job/roguetown/lord/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
 	if(L)
+		var/mob/living/carbon/human/H = L
 		var/list/chopped_name = splittext(L.real_name, " ")
 		if(length(chopped_name) > 1)
 			chopped_name -= chopped_name[1]
@@ -67,6 +68,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 
 		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_marriage_choice)), 50)
 		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
+		addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, (H.gender == FEMALE) ? FAMILY_MOTHER : FAMILY_FATHER), 41 SECONDS)
 
 /datum/outfit/job/roguetown/lord
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich

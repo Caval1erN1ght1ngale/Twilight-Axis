@@ -468,6 +468,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["hair_color"]			>> hair_color
 	S["facial_hair_color"]	>> facial_hair_color
 	S["eye_color"]			>> eye_color
+	S["family"]				>> family
+	S["gender_choice"] 		>> gender_choice
+	S["setspouse"] 			>> setspouse
+	S["xenophobe_pref"]		>> xenophobe_pref
 	S["vampire_skin"]		>> vampire_skin
 	S["vampire_hair"]		>> vampire_hair
 	S["vampire_eyes"]		>> vampire_eyes
@@ -657,6 +661,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	age				= sanitize_inlist(age, pref_species.possible_ages)
 	eye_color		= sanitize_hexcolor(eye_color, 3, 0)
+	family 			= family
+	gender_choice 	= gender_choice
+	setspouse 		= setspouse
+	xenophobe_pref 	= xenophobe_pref
 	extra_language  = extra_language
 	voice_color		= voice_color
 	voice_pitch		= voice_pitch
@@ -798,6 +806,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["virtuetwo"], virtuetwo.type)
 	WRITE_FILE(S["race_bonus"], race_bonus)
 	WRITE_FILE(S["combat_music"], combat_music.type)
+	WRITE_FILE(S["family"], family)
+	WRITE_FILE(S["gender_choice"], gender_choice)
+	WRITE_FILE(S["setspouse"], setspouse)
+	WRITE_FILE(S["xenophobe_pref"], xenophobe_pref)
 	WRITE_FILE(S["body_size"] , features["body_size"])
 	WRITE_FILE(S["nsfwflavortext"] , html_decode(nsfwflavortext))
 	WRITE_FILE(S["nsfw_headshot_link"] , nsfw_headshot_link) //TA edit

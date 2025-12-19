@@ -40,6 +40,8 @@
 
 /datum/job/roguetown/hand/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
+	var/mob/living/carbon/human/H = L
+	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), H, FAMILY_OMMER), 45 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(know_agents), L), 5 SECONDS)
 
 ///////////

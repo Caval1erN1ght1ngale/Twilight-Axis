@@ -271,6 +271,12 @@
 	if(cmode_music)
 		H.cmode_music = cmode_music
 
+	if(istype(H, /mob/living/carbon/human))
+		var/mob/living/carbon/human/Hu = H
+		if(Hu.familytree_pref != FAMILY_NONE && !Hu.family_datum)
+			var/timer = (rand(1,30) + 10)
+			addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddLocal), H, Hu.familytree_pref), timer SECONDS)
+
 	if (!hidden_job)
 		var/mob_name = H.real_name
 		var/mob_rank
