@@ -606,7 +606,6 @@
 	if(!owner.cmode)
 		stamheal *= 2
 	owner.energy_add(stamheal)
-	owner.adjust_bodytemperature(8)
 
 /datum/status_effect/buff/campfire_stamina/on_remove()
 	owner.remove_filter(CAMPFIRE_BASE_FILTER)

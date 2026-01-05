@@ -60,7 +60,6 @@
 	desc = "A comfortable warm hat lined with fur."
 	icon_state = "hatfur"
 	sewrepair = TRUE
-	cold_protection = 5
 
 /obj/item/clothing/head/roguetown/papakha
 	name = "papakha"
@@ -71,14 +70,12 @@
 	blocksound = SOFTHIT
 	salvage_result = /obj/item/natural/fur
 	salvage_amount = 1
-	cold_protection = 10
 
 /obj/item/clothing/head/roguetown/hatblu
 	name = "fur hat"
 	desc = "A blue hat lined with fur."
 	icon_state = "hatblu"
 	sewrepair = TRUE
-	cold_protection = 5
 
 /obj/item/clothing/head/roguetown/fisherhat
 	name = "straw hat"
