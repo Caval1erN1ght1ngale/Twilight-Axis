@@ -1,5 +1,5 @@
 /datum/supply_pack/rogue/artillery
-	group = "Артиллерия"
+	group = "Artillery"
 	crate_name = "merchant guild's crate"
 	crate_type = /obj/structure/closet/crate/chest/merchant
 
@@ -8,7 +8,7 @@
 	cost = 60
 	contains = list(/obj/item/mortar_wheel, /obj/item/mortar_wheel, /obj/item/mortar_wheel, /obj/item/mortar_wheel)
 
-/datum/supply_pack/rogue/artillery/mortar_wheels
+/datum/supply_pack/rogue/artillery/mortar_lafet
 	name = "Лафет мортиры"
 	cost = 100
 	contains = list(/obj/item/artillery_assembly/mortar)
