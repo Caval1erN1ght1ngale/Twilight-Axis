@@ -166,11 +166,11 @@
 
 	charge_level = 0
 
-	last_fired = world.time
-	barrel_integrity -= 1
 
 	if((world.time - last_fired) < colddown)
 		barrel_integrity -= 1
+	last_fired = world.time
+	barrel_integrity -= 1
 
 	if(barrel_integrity == 0)
 		explosion(src, 1, 8, 10, flame_range = 3)
