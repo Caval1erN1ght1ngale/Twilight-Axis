@@ -10,7 +10,7 @@
 	ricochets_max = 3
 
 /obj/item/artillery_shell/mortar
-	name = "Снаряд мортиры"
+	name = "mortar shell"
 	sellprice = 50
 
 /obj/item/artillery_shell/shell_action()
@@ -73,7 +73,7 @@
 	qdel(src)
 
 /obj/structure/artillery/mortar
-	name = "Мортира"
+	name = "mortar"
 	desc = "Тяжелое оружие навесного боя, предназначенное для забрасывания врага снарядам за стены и укрепления.\
 		Стреляет крутым подъемом, полагаясь на силу пороха и руку артиллериста, а не на прямую наводку."
 
@@ -88,28 +88,28 @@
 
 
 /obj/item/artillery_assembly/mortar
-	name = "Лафет мортиры"
+	name = "mortar carriage"
 	icon = 'modular_twilight_axis/awful_artillery/icons/artillery.dmi'
 	icon_state = "mortar_base"
 	w_class = WEIGHT_CLASS_HUGE
 
 
 /obj/item/mortar_wheel 
-	name = "Колесо лафета мортиры"
+	name = "mortar carriage wheel"
 	icon = 'modular_twilight_axis/awful_artillery/icons/artillery.dmi'
 	icon_state = "mortar_wheel"
 	sellprice = 5
 	
 
 /obj/item/mortar_barrel 
-	name = "Ствол мортиры"
+	name = "barrel of the mortar"
 	icon = 'modular_twilight_axis/awful_artillery/icons/artillery.dmi'
 	icon_state = "barrel"
 	sellprice = 150
 	w_class = WEIGHT_CLASS_HUGE
 
 /obj/item/mortar_used_barrel
-	name = "Испорченный ствол мортиры"
+	name = "damaged mortar barrel"
 	desc = "Если обжечь в печи, можно частично восстановить ствол."
 	icon = 'modular_twilight_axis/awful_artillery/icons/artillery.dmi'
 	icon_state = "barrel"
@@ -119,7 +119,7 @@
 
 
 /obj/structure/closet/crate/chest/mortar 
-	name = "Ящик с мортирой"
+	name = "chest with a mortar"
 	desc = "Старый ящик с импортным вооружением"
 
 /obj/structure/closet/crate/chest/mortar/PopulateContents()
@@ -134,19 +134,19 @@
 	new /obj/item/mortar_wheel(src)
 	new /obj/item/mortar_wheel(src)
 	new /obj/item/mortar_used_barrel(src)
-	new /obj/projectile/bullet/shell_shrapnel(src)
-	new /obj/projectile/bullet/shell_shrapnel(src)
-	new /obj/projectile/bullet/shell_shrapnel(src)
-	new /obj/projectile/bullet/shell_shrapnel(src)
-	new /obj/projectile/bullet/shell_shrapnel(src)
-	new /obj/projectile/bullet/shell_shrapnel(src)
-	new /obj/projectile/bullet/shell_shrapnel(src)
+	new /obj/item/artillery_shell/mortar(src)
+	new /obj/item/artillery_shell/mortar(src)
+	new /obj/item/artillery_shell/mortar(src)
+	new /obj/item/artillery_shell/mortar(src)
+	new /obj/item/artillery_shell/mortar(src)
+	new /obj/item/artillery_shell/mortar(src)
+	new /obj/item/artillery_shell/mortar(src)
 	new /obj/item/twilight_powderflask(src)
 
 GLOBAL_VAR_INIT(mortar_was_not_spawned, FALSE)
 /obj/effect/landmark/start/knight/after_round_start()
 	if(!GLOB.mortar_was_not_spawned)
 		GLOB.mortar_was_not_spawned = TRUE
-		var/obj/structure/closet/crate/chest/mortar/chest = new /obj/structure/closet/crate/chest/mortar(loc)
+		new /obj/structure/closet/crate/chest/mortar(loc)
 
 	. = ..()
