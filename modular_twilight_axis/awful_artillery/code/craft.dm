@@ -34,11 +34,17 @@
 /obj/item/artillery_barrel_assembly
 	name = "Заготовка ствола для артиллерии"
 	desc = "Можно специализировать для конкретной артиллерии"
+	icon = 'modular_twilight_axis/awful_artillery/icons/artillery.dmi'
+	icon_state = "barrel"
+	color = "#5c524b"
 	sellprice = 50
 
 /obj/item/mortar_barrel_assembly
 	name = "Заготовка ствола мортиры"
 	desc = "Тщательная полировки и будет готово"
+	icon = 'modular_twilight_axis/awful_artillery/icons/artillery.dmi'
+	icon_state = "barrel"
+	color = "#96745e"
 	sellprice = 50
 
 /datum/anvil_recipe/engineering/artillery/mortar_barrel_from_universal
