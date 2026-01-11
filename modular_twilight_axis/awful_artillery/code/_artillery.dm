@@ -76,6 +76,7 @@
 				ammo = used_item
 				to_chat(usr, span_info("Я зарядил снаряд в [src.name]"))
 				playsound(src, 'modular_twilight_axis/awful_artillery/sound/loading.ogg', 100, 0, 1, 1, null, null, FALSE, TRUE)
+				log_game("[user] loaded artillery shell into [src]")
 
 	if(istype(used_item, /obj/item/twilight_powderflask))
 		if(ammo)
@@ -85,6 +86,7 @@
 			if(do_after(user, 20, target = src))
 				to_chat(usr, span_info("Я заправил [src.name] порохом"))
 				charge_level = min(charge_level + 1, charge_max)
+				log_game("[user] added gun powder into [src]")
 
 	return ..()
 
@@ -171,6 +173,8 @@
 		barrel_integrity -= 1
 	last_fired = world.time
 	barrel_integrity -= 1
+
+	log_game("[user] fired artillery([src]) at [target.loc.name]([target.x] [target.y] [target.z])")
 
 	if(barrel_integrity == 0)
 		explosion(src, 1, 8, 10, flame_range = 3)

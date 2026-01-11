@@ -63,7 +63,6 @@
 				shrapnel.fire(i/12)
 		else 
 			explosion(T, 4, 10, 20, flame_range = 3, smoke = TRUE, ignorecap = TRUE)
-			explosion(turf_below, 1, 2, 4, flame_range = 0, smoke = TRUE, ignorecap = TRUE)
 			sleep(0.25 SECONDS)
 
 			for(var/i = 0, i < 30, ++i)
