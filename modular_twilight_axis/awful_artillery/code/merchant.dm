@@ -20,10 +20,10 @@
 
 /datum/supply_pack/rogue/artillery/mortar_sheel
 	name = "Снаряд мортиры"
-	cost = 80
+	cost = 120
 	contains = list(/obj/item/artillery_shell/mortar)
 
 /datum/supply_pack/rogue/artillery/mortar_shell_x8
 	name = "Снаряд мортиры х8"
-	cost = 600
+	cost = 750
 	contains = list(/obj/item/artillery_shell/mortar, /obj/item/artillery_shell/mortar, /obj/item/artillery_shell/mortar, /obj/item/artillery_shell/mortar, /obj/item/artillery_shell/mortar, /obj/item/artillery_shell/mortar, /obj/item/artillery_shell/mortar, /obj/item/artillery_shell/mortar)

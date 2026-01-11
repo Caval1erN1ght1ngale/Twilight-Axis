@@ -65,12 +65,12 @@
 	created_item = /obj/item/mortar_barrel_assembly
 	createditem_num = 1
 	craftdiff = 6
-	max_progress = 600
+	max_progress = 1000
 
 /datum/crafting_recipe/roguetown/artillery/polish_mortar_barrel
 	name = "Полировка заготовки ствола мортиры"
 	result = /obj/item/mortar_barrel
-	reqs = list(/obj/item/mortar_barrel_assembly)
+	reqs = list(/obj/item/mortar_barrel_assembly = 1)
 	tools = list(/obj/item/natural/cloth)
 	verbage_simple = "polish"
 	verbage = "polishes"

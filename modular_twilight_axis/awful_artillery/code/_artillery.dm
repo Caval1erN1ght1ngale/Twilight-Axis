@@ -46,7 +46,7 @@
 
 /obj/structure/artillery/Initialize()
 	. = ..()
-	barrel_integrity = rand(8, 20)
+	barrel_integrity = rand(6, 14)
 	charge_velocity_step = rand(8, 20)
 
 	
