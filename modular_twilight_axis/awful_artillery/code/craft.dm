@@ -32,7 +32,7 @@
 /// Плацебо, проще купить у торговца, но игроки попросили
 //////////////////////////////////////////////////////////////////////
 /obj/item/artillery_barrel_assembly
-	name = "Заготовка ствола для артиллерии"
+	name = "Artillery barrel blank"
 	desc = "Можно специализировать для конкретной артиллерии"
 	icon = 'modular_twilight_axis/awful_artillery/icons/artillery.dmi'
 	icon_state = "barrel"
@@ -40,7 +40,7 @@
 	sellprice = 50
 
 /obj/item/mortar_barrel_assembly
-	name = "Заготовка ствола мортиры"
+	name = "Mortar barrel blank"
 	desc = "Тщательная полировки и будет готово"
 	icon = 'modular_twilight_axis/awful_artillery/icons/artillery.dmi'
 	icon_state = "barrel"
@@ -56,15 +56,16 @@
 	craftdiff = 6
 
 /datum/anvil_recipe/engineering/artillery
-	i_type = "Tools"
+	i_type = "Artillery"
 
 /datum/anvil_recipe/engineering/artillery/mortar_barrel
 	name = "Заготовка ствола мортиры "
-	req_bar = /obj/item/ingot/steel
-	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
+	req_bar = /obj/item/ingot/blacksteel
+	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel,/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
 	created_item = /obj/item/mortar_barrel_assembly
 	createditem_num = 1
 	craftdiff = 6
+	max_progress = 600
 
 /datum/crafting_recipe/roguetown/artillery/polish_mortar_barrel
 	name = "Полировка заготовки ствола мортиры"
