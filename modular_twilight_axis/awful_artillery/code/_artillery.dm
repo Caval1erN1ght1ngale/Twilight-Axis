@@ -175,6 +175,7 @@
 	barrel_integrity -= 1
 
 	log_game("[user] fired artillery([src]) at [target.loc.name]([target.x] [target.y] [target.z])")
+	message_admins("Artillery fired at [ADMIN_VERBOSEJMP(src.loc)] by [user] to [ADMIN_VERBOSEJMP(target)]")
 
 	if(barrel_integrity == 0)
 		explosion(src, 1, 8, 10, flame_range = 3)
