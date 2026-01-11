@@ -3,7 +3,7 @@
 	skillcraft = /datum/skill/craft/engineering
 
 /datum/crafting_recipe/roguetown/artillery/mortar_wheel
-	name = "Колесо лафета мортиры"
+	name = "колесо лафета мортиры"
 	result = /obj/item/mortar_wheel 
 	reqs = list(/obj/item/grown/log/tree/stick = 4, /obj/item/grown/log/tree/small = 1)
 	verbage_simple = "engineer"
@@ -11,7 +11,7 @@
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/artillery/mortar_base
-	name = "Лафет мортиры"
+	name = "лафет мортиры"
 	result = /obj/item/artillery_assembly/mortar
 	reqs = list(/obj/item/grown/log/tree/small = 4, /obj/item/grown/log/tree = 2)
 	verbage_simple = "engineer"
@@ -19,7 +19,7 @@
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/artillery/finish_mortar
-	name = "Сборка мортиры"
+	name = "сборка мортиры"
 	result = /obj/structure/artillery/mortar
 	reqs = list(/obj/item/mortar_wheel = 4, /obj/item/mortar_barrel  = 1, /obj/item/artillery_assembly/mortar = 1)
 	verbage_simple = "engineer"
@@ -32,7 +32,7 @@
 /// Плацебо, проще купить у торговца, но игроки попросили
 //////////////////////////////////////////////////////////////////////
 /obj/item/artillery_barrel_assembly
-	name = "Artillery barrel blank"
+	name = "artillery barrel blank"
 	desc = "Можно специализировать для конкретной артиллерии"
 	icon = 'modular_twilight_axis/awful_artillery/icons/artillery.dmi'
 	icon_state = "barrel"
@@ -40,7 +40,7 @@
 	sellprice = 50
 
 /obj/item/mortar_barrel_assembly
-	name = "Mortar barrel blank"
+	name = "mortar barrel blank"
 	desc = "Тщательная полировки и будет готово"
 	icon = 'modular_twilight_axis/awful_artillery/icons/artillery.dmi'
 	icon_state = "barrel"
@@ -48,7 +48,7 @@
 	sellprice = 50
 
 /datum/anvil_recipe/engineering/artillery/mortar_barrel_from_universal
-	name = "Заготовка ствола мортиры(переделка ствола) "
+	name = "заготовка ствола мортиры(переделка ствола) "
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/artillery_barrel_assembly)
 	created_item = /obj/item/mortar_barrel_assembly
@@ -59,7 +59,7 @@
 	i_type = "Artillery"
 
 /datum/anvil_recipe/engineering/artillery/mortar_barrel
-	name = "Заготовка ствола мортиры "
+	name = "заготовка ствола мортиры "
 	req_bar = /obj/item/ingot/blacksteel
 	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel,/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
 	created_item = /obj/item/mortar_barrel_assembly
@@ -68,7 +68,7 @@
 	max_progress = 1000
 
 /datum/crafting_recipe/roguetown/artillery/polish_mortar_barrel
-	name = "Полировка заготовки ствола мортиры"
+	name = "полировка заготовки ствола мортиры"
 	result = /obj/item/mortar_barrel
 	reqs = list(/obj/item/mortar_barrel_assembly = 1)
 	tools = list(/obj/item/natural/cloth)
