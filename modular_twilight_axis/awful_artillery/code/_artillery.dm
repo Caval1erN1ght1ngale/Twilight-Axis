@@ -278,3 +278,6 @@
 	w_class = WEIGHT_CLASS_HUGE
 
 
+#undef GRAVITY
+#undef BASE_AZIMUTH_ERROR
+#undef OVERHEAT_ERROR

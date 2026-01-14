@@ -1,4 +1,5 @@
-
+#define PROJECTILE_NUM 30 
+#define PROJECTILE_DEGREES_DIV 12
 /obj/projectile/bullet/shell_shrapnel
 	name = "bullet"
 	icon_state = "bullet"
@@ -58,16 +59,16 @@
 			explosion(turf_below, 4, 10, 20, flame_range = 3, smoke = TRUE, ignorecap = TRUE)
 			sleep(0.25 SECONDS)
 
-			for(var/i = 0, i < 20, ++i)
+			for(var/i = 0, i < PROJECTILE_NUM, ++i)
 				var/obj/projectile/bullet/shell_shrapnel/shrapnel = new/obj/projectile/bullet/shell_shrapnel(turf_below)
-				shrapnel.fire(i/12)
+				shrapnel.fire(i/PROJECTILE_DEGREES_DIV)
 		else 
 			explosion(T, 4, 10, 20, flame_range = 3, smoke = TRUE, ignorecap = TRUE)
 			sleep(0.25 SECONDS)
 
-			for(var/i = 0, i < 30, ++i)
+			for(var/i = 0, i < PROJECTILE_NUM, ++i)
 				var/obj/projectile/bullet/shell_shrapnel/shrapnel = new/obj/projectile/bullet/shell_shrapnel(T)
-				shrapnel.fire(i/12)
+				shrapnel.fire(i/PROJECTILE_DEGREES_DIV)
 	
 	qdel(src)
 
@@ -149,3 +150,7 @@ GLOBAL_VAR_INIT(mortar_was_not_spawned, FALSE)
 		new /obj/structure/closet/crate/chest/mortar(loc)
 
 	. = ..()
+
+
+#undef PROJECTILE_NUM 
+#undef PROJECTILE_DEGREES_DIV
