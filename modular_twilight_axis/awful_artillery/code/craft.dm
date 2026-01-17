@@ -24,7 +24,7 @@
 	reqs = list(/obj/item/mortar_wheel = 4, /obj/item/mortar_barrel  = 1, /obj/item/artillery_assembly/mortar = 1)
 	verbage_simple = "engineer"
 	verbage = "engineers"
-	craftdiff = 1
+	craftdiff = 0
 
 
 ///////////////////////////////////////////////////////////////////////
