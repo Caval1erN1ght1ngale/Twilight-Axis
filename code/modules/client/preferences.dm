@@ -2880,6 +2880,8 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 	character.char_accent = char_accent
 
+	apply_customizers_to_character(character)
+
 	if(culinary_preferences)
 		apply_culinary_preferences(character)
 
