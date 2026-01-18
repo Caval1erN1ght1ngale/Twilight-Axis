@@ -194,6 +194,39 @@
 	log_game("[user] fired artillery([src]) at [target.loc.name]([target.x] [target.y] [target.z])")
 	message_admins("Artillery fired at [ADMIN_VERBOSEJMP(src.loc)] by [user] to [ADMIN_VERBOSEJMP(target)]")
 
+	for(var/mob/M in GLOB.player_list)
+		if(istype(M, /mob/living))
+			var/message = "Слышно звук выстрела артиллерии"
+			var/dist = get_dist(get_turf(src), M)
+			if(dist > 15)
+				message += " на расстоянии около [floor(dist/15)*15] метров"
+			if(M.z < src.z)
+				message += " откуда то сверху"
+			if(M.z > src.z)
+				message += " откуда то снизу"
+
+			var/dir = get_dir(src, M)
+			switch(dir)
+				if(NORTH)
+					message += " с севера"
+				if(SOUTH) 
+					message += " с юга"
+				if(EAST) 
+					message += " с востока"
+				if(WEST)
+					message += " с запада"
+				if(NORTHEAST) 
+					message += " с северо-востока"
+				if(NORTHWEST) 
+					message += " с северо-запада"
+				if(SOUTHEAST)  
+					message += " с юго-востока"
+				if(SOUTHWEST)
+					message += " с юго-запада"
+			
+			message += "."
+			to_chat(M, message)
+
 	if(barrel_integrity <= 0)
 		src.visible_message(span_danger("[src] взрывается из-за износа ствола!"))
 		explosion(src, 1, 2, 10, flame_range = 3)
@@ -246,10 +279,10 @@
 	switch(action)
 		if("fire")
 			if(charge_level == 0)
-				to_chat(ui.user, span_warning("В стволе нету заряда"))
+				to_chat(ui.user, span_warning("В стволе нету заряда."))
 				return
 			if(!ammo)
-				to_chat(ui.user, span_warning("В стволе нету снаряда"))
+				to_chat(ui.user, span_warning("В стволе нету снаряда."))
 				return
 			if(HAS_TRAIT(ui.user, TRAIT_ARTILLERY_EXPERT))
 				if(do_after(ui.user, 15, target = src))
@@ -262,21 +295,21 @@
 			if(do_after(ui.user, 10, target = src))
 				charge_level = max(charge_level - 1, charge_min)
 				playsound(src, 'modular_twilight_axis/awful_artillery/sound/removepowder.ogg', 100, 1, 1, 1, null, null, FALSE, FALSE)
-				ui.user.visible_message(span_info("[ui.user] извлекает лишний порох из [src]"))
+				ui.user.visible_message(span_info("[ui.user] извлекает лишний порох из [src]."))
 		if("set_elevation")
 			elevation = params["value"]
 			playsound(src, 'modular_twilight_axis/awful_artillery/sound/anglecorrection.ogg', 100, 1, 1, 1, null, null, FALSE, FALSE)
-			ui.user.visible_message(span_info("[ui.user] правит возвышение"))
+			ui.user.visible_message(span_info("[ui.user] правит возвышение."))
 		if("set_azimuth")
 			azimuth = params["value"]
 			playsound(src, 'modular_twilight_axis/awful_artillery/sound/anglecorrection.ogg', 100, 1, 1, 1, null, null, FALSE, FALSE)
-			ui.user.visible_message(span_info("[ui.user] правит азимут"))
+			ui.user.visible_message(span_info("[ui.user] правит азимут."))
 		if("eject_ammo")
 			if(do_after(ui.user, 20, target = src))
 				playsound(src, 'modular_twilight_axis/awful_artillery/sound/anglecorrection.ogg', 100, 1, 1, 1, null, null, FALSE, FALSE)
 				ammo.forceMove(loc)
 				ammo = null
-				ui.user.visible_message(span_info("[ui.user] извлекает боеприпас из [src]"))
+				ui.user.visible_message(span_info("[ui.user] извлекает боеприпас из [src]."))
 		if("disasseble")
 			if(do_after(ui.user, 20, target = src))
 				playsound(src, 'modular_twilight_axis/awful_artillery/sound/anglecorrection.ogg', 100, 1, 1, 1, null, null, FALSE, FALSE)
@@ -285,7 +318,7 @@
 					new path(loc)
 				ui.close()
 				qdel(src)
-				ui.user.visible_message(span_info("[ui.user] разобрал [src]"))
+				ui.user.visible_message(span_info("[ui.user] разобрал [src]."))
 
 	SStgui.try_update_ui(ui.user, src)
 

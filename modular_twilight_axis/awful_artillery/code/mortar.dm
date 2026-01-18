@@ -117,7 +117,7 @@ GLOBAL_VAR_INIT(has_mortar_spawned, FALSE)
 		GLOB.has_mortar_spawned = TRUE
 		var/obj/structure/artillery/mortar/mortar = new /obj/structure/artillery/mortar(H.loc)
 		H.start_pulling(mortar)
-		to_chat(H, span_danger("Со мной моя трофейная мортира, замечательно"))
+		to_chat(H, span_danger("Со мной моя трофейная мортира, замечательно."))
 
 #undef PROJECTILE_NUM 
 #undef PROJECTILE_DEGREES_DIV
