@@ -94,12 +94,25 @@
 	target_items = list(/obj/item/rogueweapon/greataxe/steel)
 	result_item = /obj/item/rogueweapon/greataxe/steel/gilded
 
-//Zydras donator item - bathmatron padded dress
-/obj/item/enchantingkit/zydras
-	name = "'Gold-Black silky dress morphing elixir"
-	desc = "A small container of special morphing dust, perfect to make a specifc item. Required: Silky Dress"
-	target_items = list(/obj/item/clothing/suit/roguetown/shirt/dress/silkydress)
-	result_item = /obj/item/clothing/suit/roguetown/shirt/dress/silkydress/zydrasdress 
+
+//Zydras donator items - Iconoclast pyromaniac
+/obj/item/enchantingkit/zydrasiconocrown
+	name = "Barred Helmet morphing elixir"
+	target_items = list(/obj/item/clothing/head/roguetown/helmet/heavy/sheriff)
+	result_item = /obj/item/clothing/head/roguetown/helmet/heavy/sheriff/zydrasiconocrown
+
+/obj/item/enchantingkit/zydrasiconopauldrons
+	name = "Light Brigandine morphing elixir"
+	target_items = list(/obj/item/clothing/suit/roguetown/armor/brigandine/light)
+	result_item = /obj/item/clothing/suit/roguetown/armor/brigandine/light/zydrasiconopauldrons
+
+/obj/item/enchantingkit/zydrasiconosash
+	name = "Iron Hauberk morphing elixir"
+	target_items = list(
+		/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/iron = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/iron/zydrasiconosash ,
+		/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/ = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/zydrasiconosash)
+	result_item = null
+	icon_loadout = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/zydrasiconosash
 
 //Eiren - Zweihander and sabres
 /obj/item/enchantingkit/eiren
@@ -169,5 +182,15 @@
 	desc = "A small container of special morphing dust, perfect to make a specifc item. Required: Fluted Cuirass"
 	target_items = list(/obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted)
 	result_item = /obj/item/clothing/suit/roguetown/armor/plate/cuirass/fluted/dasfox
+
+//Ryan180602 - Armet
+/obj/item/enchantingkit/ryan_psyhelm
+	name = "'maimed psydonic helm' morphing elixir"
+	desc = "A small container of special morphing dust, perfect to make a specifc item. Required: Psydonic Helmet(Armet,Barbute,Bucket Helmet or Sallet)"
+	target_items = list(/obj/item/clothing/head/roguetown/helmet/heavy/psydonhelm = /obj/item/clothing/head/roguetown/helmet/heavy/psydonhelm/ryan,
+	/obj/item/clothing/head/roguetown/helmet/heavy/psybucket = /obj/item/clothing/head/roguetown/helmet/heavy/psydonhelm/ryan,
+	/obj/item/clothing/head/roguetown/helmet/heavy/psysallet = /obj/item/clothing/head/roguetown/helmet/heavy/psydonhelm/ryan,
+	/obj/item/clothing/head/roguetown/helmet/heavy/psydonbarbute = /obj/item/clothing/head/roguetown/helmet/heavy/psydonhelm/ryan)
+	icon_loadout = /obj/item/clothing/head/roguetown/helmet/heavy/psydonhelm/ryan
 
 

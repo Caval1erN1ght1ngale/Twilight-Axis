@@ -7,7 +7,11 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	//doohickeys for savefiles
 	var/path
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
+  
+	var/loaded_slot = 1
+
 	var/max_save_slots = 20
+
 
 	//non-preference stuff
 	var/muted = 0
@@ -182,7 +186,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/lich_headshot_link
 	var/vampire_headshot_link
 	var/werewolf_headshot_link //not used but setting up for the future
-	var/chatheadshot = FALSE
+	var/chatheadshot = TRUE
 	var/nsfw_headshot_link //Twilight Axis edit далее TA
 	var/list/violated = list() // ТА
 	var/ooc_extra
@@ -235,6 +239,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/rumour
 
 	var/noble_gossip
+
+	var/averse_chosen_faction = "Inquisition"
 
 	var/datum/loadout_panel/loadoutpanel
 
@@ -481,6 +487,10 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			else
 				virtuetwo = GLOB.virtues[/datum/virtue/none]
 			dat += "<b>Vice:</b> <a href='?_src_=prefs;preference=charflaw;task=input'>[charflaw]</a><BR>"
+			if(istype(charflaw, /datum/charflaw/averse))
+				if(!averse_chosen_faction)
+					averse_chosen_faction = "Inquisition"
+				dat += "<b>Loathed Group:</b> <a href='?_src_=prefs;preference=charflaw_averse_choice;task=input'>[averse_chosen_faction]</a><BR>"
 			var/datum/faith/selected_faith = GLOB.faithlist[selected_patron?.associated_faith]
 			dat += "<b>Faith:</b> <a href='?_src_=prefs;preference=faith;task=input'>[selected_faith?.name || "FUCK!"]</a><BR>"
 			dat += "<b>Patron:</b> <a href='?_src_=prefs;preference=patron;task=input'>[selected_patron?.name || "FUCK!"]</a><BR>"
@@ -1441,7 +1451,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	else if(href_list["preference"] == "descriptors")
 		show_descriptors_ui(user)
 		return
-	
+
 	else if(href_list["preference"] == "lore_primer")
 		LorePopup(user)
 		return
@@ -1626,28 +1636,6 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							nickname = new_name
 						else
 							to_chat(user, "<font color='red'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ', . and ,.</font>")
-
-				if("subclassoutfit")
-					var/list/choices = list("None")
-					var/datum/job/highest_pref
-					for(var/job in job_preferences)
-						if(job_preferences[job] > highest_pref)
-							highest_pref = SSjob.GetJob(job)
-					if(isnull(highest_pref))
-						to_chat(user, "<b>I don't have a Class set to High!</b>")
-					if(length(highest_pref.job_subclasses))
-						for(var/adv in highest_pref.job_subclasses)
-							var/datum/advclass/advpath = adv
-							var/datum/advclass/advref = SSrole_class_handler.get_advclass_by_name(initial(advpath.name))
-							choices[advref.name] = advref
-					if(length(choices))
-						var/new_choice = input(user, "Choose an outfit preview:", "Outfit Preview")  as anything in choices|null
-						if(new_choice && new_choice != "None")
-							preview_subclass = choices[new_choice]
-							update_preview_icon()
-						else
-							preview_subclass = null
-							update_preview_icon(jobOnly = TRUE)
 
 //				if("age")
 //					var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Years Dead") as num|null
@@ -1959,7 +1947,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						rumour = null
 						ShowChoices(user)
 						return
-					if(length(new_rumour) > 400)
+					if(length(new_rumour) > 800)
 						to_chat(user, span_warning("Rumours cannot exceed 400 characters."))
 						ShowChoices(user)
 						return
@@ -1976,7 +1964,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						noble_gossip = null
 						ShowChoices(user)
 						return
-					if(length(new_gossip) > 400)
+					if(length(new_gossip) > 800)
 						to_chat(user, span_notice("Noble gossip cannot exceed 400 characters."))
 						ShowChoices(user)
 						return
@@ -2086,7 +2074,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						rumour_display = parsemarkdown_basic(rumour_display, hyperlink = TRUE)
 						msg += "<b>You recall what you heard around Town about [real_name]...</b><br>[rumour_display]"
 					if(length(noble_gossip))
-						if(msg) 
+						if(msg)
 							msg += "<br><br>"
 						var/gossip_display = noble_gossip
 						gossip_display = html_encode(gossip_display)
@@ -2212,7 +2200,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					if(choice)
 						preset_bounty_severity_key = sev_choices[choice]
 					return
-				
+
 				if("preset_bounty_severity_b_key")
 					var/list/sev_choices = list()
 					for(var/key in GLOB.bandit_severities)
@@ -2225,7 +2213,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				if("preset_bounty_crime")
 					preset_bounty_crime = input(user, "What is your crime?", "Crime") as text|null
 					return
-					
+
 				if("update_mutant_colors")
 					update_mutant_colors = !update_mutant_colors
 
@@ -2288,6 +2276,11 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						if(charflaw.desc)
 							to_chat(user, "<span class='info'>[charflaw.desc]</span>")
 
+				if("charflaw_averse_choice")
+					var/choice = tgui_input_list(user, "Who do you loathe?", "AVERSION", GLOB.averse_factions)
+					if(choice)
+						averse_chosen_faction = choice
+
 				if("race_bonus_select")
 					if(length(pref_species.custom_selection))
 						var/choice = tgui_input_list(user, "What has fate blessed your race with?", "BONUS", pref_species.custom_selection)
@@ -2343,15 +2336,6 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						skin_tone = listy[new_s_tone]
 						features["mcolor"] = sanitize_hexcolor(skin_tone)
 						try_update_mutant_colors()
-
-				if("charflaw")
-					var/selectedflaw
-					selectedflaw = tgui_input_list(user, "Choose your character's flaw:", "FLAWS", GLOB.character_flaws)
-					if(selectedflaw)
-						charflaw = GLOB.character_flaws[selectedflaw]
-						charflaw = new charflaw()
-						if(charflaw.desc)
-							to_chat(user, span_info("[charflaw.desc]"))
 
 				if("char_accent")
 					var/selectedaccent = tgui_input_list(user, "Choose your character's accent:", "Character Preference", GLOB.character_accents)

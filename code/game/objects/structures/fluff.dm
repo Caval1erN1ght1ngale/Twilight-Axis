@@ -604,7 +604,7 @@
 		if(3)
 			day = "Wedding's dae."
 		if(4)
-			day = "Thule's dae."
+			day = "Toll's dae."
 		if(5)
 			day = "Freyja's dae."
 		if(6)
@@ -680,7 +680,7 @@
 		if(3)
 			day = "Wedding's dae."
 		if(4)
-			day = "Thule's dae."
+			day = "Toll's dae."
 		if(5)
 			day = "Freyja's dae."
 		if(6)
@@ -1147,6 +1147,7 @@
 					break
 			if(proceed_with_offer)
 				playsound(loc,'sound/items/carvty.ogg', 50, TRUE)
+				log_admin("[user] ([user?.ckey]) submitted [W] ([W.type]) to the Idol, worth [W.get_real_price()]")
 				qdel(W)
 				for(var/mob/player in GLOB.player_list)
 					if(player.mind)
