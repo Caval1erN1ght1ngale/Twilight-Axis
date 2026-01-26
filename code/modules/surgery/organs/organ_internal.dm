@@ -416,4 +416,5 @@
 
 //See above
 /obj/item/organ/proc/enter_wardrobe()
+	accessory_type = initial(accessory_type)
 	STOP_PROCESSING(SSobj, src)
