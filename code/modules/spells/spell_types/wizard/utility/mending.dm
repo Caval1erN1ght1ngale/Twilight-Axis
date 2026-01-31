@@ -71,6 +71,10 @@
 	
 	return TRUE
 
+	if(mob_charge_effect)
+		QDEL_NULL(mob_charge_effect)
+
+	deactivate(user)
 
 /obj/effect/proc_holder/spell/invoked/mending/lesser
 	name = "Lesser Mending"
