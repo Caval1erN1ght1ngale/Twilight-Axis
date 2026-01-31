@@ -68,6 +68,8 @@
 			if(I.body_parts_covered_dynamic != I.body_parts_covered)
 				I.repair_coverage()
 				to_chat(user, span_info("[I]'s shorn layers mend together, completely."))
+	
+	return TRUE
 
 
 /obj/effect/proc_holder/spell/invoked/mending/lesser
