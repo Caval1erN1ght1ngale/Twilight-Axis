@@ -261,6 +261,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Called on handle_wounds(), on the life() proc
 /datum/wound/proc/on_life()
+	if(!owner || QDELETED(owner))
+		return FALSE
+	if(!owner.loc)
+		return FALSE
 	if(!isnull(clotting_threshold) && clotting_rate && (bleed_rate > clotting_threshold))
 		set_bleed_rate(max(clotting_threshold, bleed_rate - clotting_rate))
 	if(HAS_TRAIT(owner, TRAIT_PSYDONITE) && !passive_healing)
