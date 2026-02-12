@@ -262,6 +262,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /// Called on handle_wounds(), on the life() proc
 /datum/wound/proc/on_life()
 	if(!owner || QDELETED(owner))
+		qdel(src)
 		return FALSE
 	if(!owner.loc)
 		return FALSE
