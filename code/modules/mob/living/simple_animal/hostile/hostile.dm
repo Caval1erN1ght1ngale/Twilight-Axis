@@ -90,11 +90,11 @@
 		return 0
 
 /mob/living/simple_animal/hostile/handle_automated_action()
-    if(QDELETED(src) || !loc)
-        return FALSE
+	if(QDELETED(src) || !loc)
+		return FALSE
 
-    if(!targets_from || QDELETED(targets_from) || !targets_from.loc)
-        targets_from = src
+	if(!targets_from || QDELETED(targets_from) || !targets_from.loc)
+		targets_from = src
 
 	if(AIStatus == NPC_AI_OFF)
 		return 0
