@@ -173,7 +173,8 @@
 				if(user?.client?.prefs?.attack_blip_frequency == ATTACK_BLIP_PREF_ALWAYS || user?.client?.prefs?.attack_blip_frequency == ATTACK_BLIP_PREF_NEVER)
 					suppress_attack_blip = TRUE 
 				if(!suppress_attack_blip)
-					user.emote("attack", forced = TRUE)
+					if(user)
+						user.emote("attack", forced = TRUE)
 				human_owner.emote("paincrit", forced = TRUE)
 
 			if(user)
