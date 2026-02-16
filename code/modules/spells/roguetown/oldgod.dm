@@ -388,10 +388,11 @@
 
 	to_chat(H, span_info("A coin in my boot? Psydon smiles upon me!"))
 	if(!H.put_in_hands(found_thing, FALSE))
-		found_thing.forceMove(T) // fallback, если руки заняты/невалидны
+		found_thing.forceMove(T)
 
 	if(prob(H.STALUC + H.get_skill_level(associated_skill)))
-		var/obj/item/extra = new (pick(lootpool))(T)
+		var/path = pick(lootpool)
+		var/obj/item/extra = new path(T)
 		to_chat(H, span_info("Ah, of course! I almost forgot I had this stashed away for a perfect occasion."))
 		if(!H.put_in_hands(extra, FALSE))
 			extra.forceMove(T)
