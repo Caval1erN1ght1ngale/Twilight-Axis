@@ -879,21 +879,24 @@
 
 // get angry at a mob
 /mob/living/carbon/human/proc/retaliate(mob/living/L)
-	if(!wander)
-		wander = TRUE
+	if(!L || QDELETED(L))
+		return
 	if(L == src)
 		return
+
+	if(!wander)
+		wander = TRUE
+
 	if(mode != NPC_AI_OFF)
 		if(L.alpha == 0 && L.rogue_sneaking)
-			// we just got hit by something hidden so try and find them
-			if (prob(5))
+			if(prob(5))
 				visible_message(span_notice("[src] begins searching around frantically..."))
-			var/extra_chance = (health <= maxHealth * 50) ? 30 : 0 // if we're below half health, we're way more alert
-			if (!npc_detect_sneak(L, extra_chance))
+			var/extra_chance = (health <= maxHealth * 50) ? 30 : 0
+			if(!npc_detect_sneak(L, extra_chance))
 				return
+
 		NPC_THINK("Hunting [L]!")
 		mode = NPC_AI_HUNT
-		// Interrupt ongoing actions on-hit, except for standing up or resisting.
 		if(!resisting && (mobility_flags & MOBILITY_STAND))
 			doing = FALSE
 		last_aggro_loss = null
@@ -902,7 +905,7 @@
 			emote("aggro")
 		target = L
 		if(pathfinding_target != target)
-			clear_path() // Cancel pathfinding so that we can pursue our new enemy.
+			clear_path()
 		enemies |= L
 
 
