@@ -120,6 +120,8 @@
 					to_chat(user, "I have extracted a strand of luxthread, proof of passing.")
 					playsound(user, 'sound/misc/bellold.ogg', 20)
 					new /obj/item/soulthread((get_turf(user)))
+					SEND_SIGNAL(user, COMSIG_GRAVE_CONSECRATED, src)
+					record_round_statistic(STATS_GRAVES_CONSECRATED)
 					corpse.burialrited = TRUE
 
 
@@ -131,9 +133,10 @@
 		return
 
 	if(attacking_shovel.heldclod)
-		visible_message(span_notice("[user] begins filling [src]."))
-		if(!do_after(user, 3 SECONDS, TRUE, src, TRUE))
-			return
+		if(stage > 2)
+			visible_message(span_notice("[user] begins filling [src]."))
+			if(!do_after(user, 3 SECONDS, TRUE, src, TRUE))
+				return
 		playsound(loc,'sound/items/empty_shovel.ogg', 100, TRUE)
 		QDEL_NULL(attacking_shovel.heldclod)
 		if(stage == 3) //close grave
@@ -279,7 +282,7 @@
 
 /obj/structure/closet/dirthole/dump_contents()
 	for(var/mob/A in contents)
-		if((!A.stat) && (istype(A, /mob/living/carbon/human)))
+		if((istype(A, /mob/living/carbon/human)))
 			var/mob/living/carbon/human/B = A
 			B.buried = FALSE
 	..()
