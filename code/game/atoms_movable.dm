@@ -424,7 +424,7 @@
 					pullee.Move(T, get_dir(pullee, T), glide_size)
 				else
 					pullee.forceMove(T)
-				if(!QDELETED(pullee))
+				if(pullee && !QDELETED(pullee))
 					pullee.moving_from_pull = null
 			check_pulling()
 
