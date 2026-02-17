@@ -209,6 +209,8 @@
 /obj/structure/chair/wood/rogue/onkick(mob/user)
 	if(!user)
 		return
+	if(!item_chair)
+        return
 	if(isturf(loc))
 		playsound(loc, 'sound/foley/chairfall.ogg', 100, FALSE)
 		var/obj/item/I = new item_chair(loc)
