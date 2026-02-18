@@ -326,34 +326,40 @@
 /// returns # of steps taken
 /mob/living/carbon/human/proc/move_along_path()
 	if(!length(myPath))
-		// no path, quit early
 		NPC_THINK("Tried to move along a nonexistent path?!")
 		return 0
 
-	if(get_dist(src, myPath[1]) > 3) // too far away from our current path to continue
-		if(!npc_try_jump()) // try jumping to get back on course
+	if(get_dist(src, myPath[1]) > 3)
+		if(!npc_try_jump())
 			pathing_frustration++
 			NPC_THINK("TOO FAR! Strike [pathing_frustration]!")
 			return 0
-	// var/move_started = world.time
+
 	var/old_pathfinding_target = pathfinding_target
-	var/steps_to_take = maxStepsTick - steps_moved_this_turn // if this isn't our first movement step, limit how many we can take
+	var/steps_to_take = maxStepsTick - steps_moved_this_turn
+
 	for(var/movement_turn in 1 to steps_to_take)
 		if(!length(myPath))
-			NPC_THINK("MOVEMENT TURN [movement_turn]: Path complete!")
+			NPC_THINK("MOVEMENT TURN [movement_turn]: Path empty, stopping.")
 			return
-		// Try jumping prior to validation to avoid losing our path from being too far away.
-		// Basically a catch-up step. Won't run every time.
+
 		if(npc_try_jump())
 			NPC_THINK("MOVEMENT TURN [movement_turn]: Jumped, waiting 1ds!")
 			stoplag(1)
+			if(!length(myPath))
+				return
 			continue
+
 		if(!validate_path())
 			NPC_THINK("MOVEMENT TURN [movement_turn]: Path invalidated!")
 			return
+		if(!length(myPath))
+			return
+
 		if(pathfinding_target != old_pathfinding_target)
 			NPC_THINK("Changed pathfinding target, ending movement!")
 			return
+
 		// We have a valid path, but our target might be next to us due to movement. Check and bail if so.
 		// Only apply this to movables; if we're going to a specific turf we want to go ONTO it.
 		else if(ismovable(pathfinding_target) && z == pathfinding_target.z && Adjacent(pathfinding_target))
@@ -759,18 +765,24 @@
 
 /mob/living/carbon/human/proc/npc_try_make_grab(mob/living/victim)
 	NPC_THINK("Trying to grab [victim]!")
-	swap_hand() // switch to offhand
+	swap_hand()
 	rog_intent_change(3) // grab intent
+
+	used_intent = a_intent
 	npc_choose_grab_zone(victim)
-	UnarmedAttack(victim, TRUE) // instead of start_pulling(victim)
-	var/stam_penalty = used_intent.releasedrain
+	UnarmedAttack(victim, TRUE)
+
+	var/stam_penalty = used_intent?.releasedrain || 0
 	if(istype(rmb_intent, /datum/rmb_intent/strong) || istype(rmb_intent, /datum/rmb_intent/swift))
-		stam_penalty += 4 // as opposed to 10 for a weapon; these are your hands, it's easier to move them
+		stam_penalty += 4
 	stamina_add(stam_penalty)
+
 	if(pulling != victim)
 		aftermiss()
-	rog_intent_change(1) // and back to normal intent to avoid getting stuck on grabs
-	swap_hand() // switch back to mainhand
+
+	rog_intent_change(1)
+	used_intent = null // опционально, чтобы не оставлять мусор
+	swap_hand()
 	return TRUE // end your turn
 
 /// A proc used in monkey_attack. Selects and performs our preferred attack.
@@ -879,24 +891,21 @@
 
 // get angry at a mob
 /mob/living/carbon/human/proc/retaliate(mob/living/L)
-	if(!L || QDELETED(L))
-		return
-	if(L == src)
-		return
-
 	if(!wander)
 		wander = TRUE
-
+	if(L == src)
+		return
 	if(mode != NPC_AI_OFF)
 		if(L.alpha == 0 && L.rogue_sneaking)
-			if(prob(5))
+			// we just got hit by something hidden so try and find them
+			if (prob(5))
 				visible_message(span_notice("[src] begins searching around frantically..."))
-			var/extra_chance = (health <= maxHealth * 50) ? 30 : 0
-			if(!npc_detect_sneak(L, extra_chance))
+			var/extra_chance = (health <= maxHealth * 50) ? 30 : 0 // if we're below half health, we're way more alert
+			if (!npc_detect_sneak(L, extra_chance))
 				return
-
 		NPC_THINK("Hunting [L]!")
 		mode = NPC_AI_HUNT
+		// Interrupt ongoing actions on-hit, except for standing up or resisting.
 		if(!resisting && (mobility_flags & MOBILITY_STAND))
 			doing = FALSE
 		last_aggro_loss = null
@@ -905,7 +914,7 @@
 			emote("aggro")
 		target = L
 		if(pathfinding_target != target)
-			clear_path()
+			clear_path() // Cancel pathfinding so that we can pursue our new enemy.
 		enemies |= L
 
 
@@ -976,8 +985,6 @@
 		return
 
 	var/list/cell_collections = our_cells?.recalculate_cells(our_turf)
-	if(!islist(cell_collections) || cell_collections.len < 2)
-		return
 
 	for(var/datum/old_grid as anything in cell_collections[2])
 		UnregisterSignal(old_grid, list(SPATIAL_GRID_CELL_ENTERED(SPATIAL_GRID_CONTENTS_TYPE_CLIENTS), SPATIAL_GRID_CELL_EXITED(SPATIAL_GRID_CONTENTS_TYPE_CLIENTS)))

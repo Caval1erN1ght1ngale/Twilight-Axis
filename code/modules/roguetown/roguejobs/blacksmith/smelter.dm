@@ -107,13 +107,17 @@
 	to_chat(user, span_warning("\The [attacking_item] cannot be smelted."))
 
 /obj/machinery/light/rogue/smelter/attack_right(mob/user)
+	if(!ishuman(user))
+		return ..()
+
 	var/obj/item/held_item = user.get_active_held_item()
 	if(istype(held_item, /obj/item/rogueweapon/tongs))
 		attackby(held_item, user)
 		return
 
-	if(held_item?.smeltresult)
+	if(istype(held_item) && held_item.smeltresult)
 		add_item(held_item, user)
+		return
 
 	return ..()
 
