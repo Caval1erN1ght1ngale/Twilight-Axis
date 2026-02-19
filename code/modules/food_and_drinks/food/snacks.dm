@@ -728,11 +728,12 @@ All foods are distributed among various categories. Use common sense.
 /obj/item/reagent_containers/food/snacks/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	if(contents)
-		var/atom/dest = drop_location() || get_turf(src)
-		if(dest)
-			something.forceMove(dest)
-		else
-			qdel(something)
+		for(var/atom/movable/something in contents)
+			var/atom/dest = drop_location() || get_turf(src)
+			if(dest)
+				something.forceMove(dest)
+			else
+				qdel(something)
 	return ..()
 
 /obj/item/reagent_containers/food/snacks/attack_animal(mob/M)
