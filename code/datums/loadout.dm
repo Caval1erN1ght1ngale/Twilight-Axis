@@ -949,6 +949,10 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	name = "Eoran Caparison"
 	path = /obj/item/caparison/eora
 
+/datum/loadout_item/caparison/fogbeast
+	name = "Fogbeast Caparison"
+	path = /obj/item/caparison/fogbeast
+
 //////////////////
 //  TRIUMPHS !  //
 //////////////////
@@ -1468,6 +1472,30 @@ GLOBAL_LIST_EMPTY(loadout_items_by_category)
 	name = "Donator Kit - Jägerbüchse - Required: Arquebus"
 	category = list("Оружие", "Донат")
 	path = /obj/item/enchantingkit/jagerrifle
+	donatitem = TRUE
+
+/datum/loadout_item/donator_stinketh_shashka
+	name = "Donator Kit - Fencer's Shashka - Required: Szöréndnížine Sabre Or Aavnic Shashka"
+	category = list("Оружие", "Донат")
+	path = /obj/item/enchantingkit/stinketh_shashka
+	donatitem = TRUE
+
+/datum/loadout_item/donator_stinketh_pike
+	name = "Donator Kit - Kindness of Ravens Standard - Required: Banner Of Szöréndnížina"
+	category = list("Оружие", "Донат")
+	path = /obj/item/enchantingkit/stinketh_pike
+	donatitem = TRUE
+
+/datum/loadout_item/donator_koruu_glaive
+	name = "Donator Kit - Sixty Five Yils - Required: Glaive Or Naginata"
+	category = list("Оружие", "Донат")
+	path = /obj/item/enchantingkit/koruu_glaive
+	donatitem = TRUE
+
+/datum/loadout_item/donator_drd_lsword
+	name = "Donator Kit - Ornate Longsword - Required: Longsword"
+	category = list("Оружие", "Донат")
+	path = /obj/item/enchantingkit/drd_lsword
 	donatitem = TRUE
 
 // Разное
