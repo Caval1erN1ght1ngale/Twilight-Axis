@@ -182,8 +182,11 @@
 			to_chat(H, span_warning("A pair of prying eyes were laid on me..."))
 
 	if(!vice_found)
-		if(H.charflaw)
-			vice_found = H.charflaw.name
+		if(H.charflaws)
+			var/list/vices = list()
+			for(var/datum/charflaw/cf in H.charflaws)
+				vices.Add(cf.name)
+			vice_found = english_list(vices)
 		else
 			to_chat(user, span_warning("Their heart is unreadable."))
 			revert_cast()
