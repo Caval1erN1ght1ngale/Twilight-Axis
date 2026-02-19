@@ -345,11 +345,14 @@
 			hott = FALSE
 			update_icon()
 			
-/obj/item/rogueweapon/tongs/dropped()
+/obj/item/rogueweapon/tongs/dropped(mob/user)
 	. = ..()
-	var/turf/T = get_turf(src)
-	if(!T)
-		T = get_turf(usr)
+	if(!hingot)
+		hott = FALSE
+		update_icon()
+		return
+
+	var/turf/T = get_turf(src) || (user ? get_turf(user) : null)
 	if(T)
 		hingot.forceMove(T)
 	hingot = null
