@@ -520,18 +520,17 @@
 	A.Bumped(src)
 
 /atom/movable/proc/forceMove(atom/destination)
-	if(!destination || QDELETED(src))
+	if(QDELETED(src))
+		return FALSE
+
+	if(!destination)
 		CRASH("[src] No valid destination passed into forceMove")
 
 	var/mob/living/carbon/human/H = null
 	if(ishuman(src.loc))
 		H = src.loc
 
-	. = FALSE
-	if(destination)
-		. = doMove(destination)
-	else
-		CRASH("[src] No valid destination passed into forceMove")
+	. = doMove(destination)
 
 	if(H)
 		H.update_a_intents()

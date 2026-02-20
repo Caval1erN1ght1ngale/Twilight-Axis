@@ -196,6 +196,10 @@ GLOBAL_LIST_EMPTY(voice_names)
 		to_chat(src, span_warning("This meditation can no longer be answered..."))
 		return
 
+	if(!istype(schizo, /datum/schizohelp))
+		to_chat(src, span_warning("This meditation can no longer be answered..."))
+		return
+
 	if(schizo.locked && !ask_again)
 		to_chat(src, span_warning("This meditation can no longer be answered..."))
 		return
