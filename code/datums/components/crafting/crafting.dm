@@ -170,6 +170,8 @@
 
 	dir = dirin
 	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
+	if(istype(src, /obj/item/rogueore/gold))
+		record_round_statistic(STATS_GOLD_TRANSMUTED)
 	return
 
 /obj/item/OnCrafted(dirin)
