@@ -45,6 +45,11 @@ SUBSYSTEM_DEF(automapper)
 
 		loaded_config = decoded
 		return SS_INIT_SUCCESS
+	if(islist(raw))
+		loaded_config = raw
+		if(!loaded_config["templates"])
+			loaded_config["templates"] = list()
+		return SS_INIT_SUCCESS
 
 	CRASH("Automapper: Unknown TOML format for [config_file]")
 
