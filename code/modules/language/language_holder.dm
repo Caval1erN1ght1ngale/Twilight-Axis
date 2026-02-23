@@ -60,6 +60,9 @@
 	languages.Cut()
 
 /datum/language_holder/proc/has_language(datum/language/dt)
+	if(!dt || !ispath(dt))
+		return FALSE
+	
 	if(is_type_in_typecache(dt, languages))
 		return LANGUAGE_KNOWN
 

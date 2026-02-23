@@ -1112,16 +1112,15 @@ GLOBAL_VAR_INIT(pixel_diff_time, 1)
 	return FALSE
 
 /atom/movable/proc/get_default_language()
-	// if no language is specified, and we want to say() something, which
-	// language do we use?
 	var/datum/language_holder/H = get_language_holder()
+	if(!H)
+		return null
 
 	if(H.selected_default_language)
 		if(can_speak_in_language(H.selected_default_language))
 			return H.selected_default_language
 		else
 			H.selected_default_language = null
-
 
 	var/datum/language/chosen_langtype
 	var/highest_priority
@@ -1136,8 +1135,11 @@ GLOBAL_VAR_INIT(pixel_diff_time, 1)
 			chosen_langtype = langtype
 			highest_priority = pri
 
-	H.selected_default_language = .
 	. = chosen_langtype
+	H.selected_default_language = chosen_langtype
+
+	if(H.selected_default_language == "None")
+	H.selected_default_language = null
 
 /* End language procs */
 /atom/movable/proc/ConveyorMove(movedir)
