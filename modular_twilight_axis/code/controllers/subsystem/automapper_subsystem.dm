@@ -170,6 +170,8 @@ SUBSYSTEM_DEF(automapper)
 /datum/controller/subsystem/automapper/proc/get_turf_blacklists(map_names)
 	if(!map_names)
 		return list()
+
+	if(!islist(map_names))
 		map_names = list(map_names)
 
 	var/list/blacklisted_turfs = list()
