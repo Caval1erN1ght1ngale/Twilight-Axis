@@ -1139,7 +1139,7 @@ GLOBAL_VAR_INIT(pixel_diff_time, 1)
 	H.selected_default_language = chosen_langtype
 
 	if(H.selected_default_language == "None")
-	H.selected_default_language = null
+		H.selected_default_language = null
 
 /* End language procs */
 /atom/movable/proc/ConveyorMove(movedir)
